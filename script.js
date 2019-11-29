@@ -17,10 +17,7 @@ var ctx = canvas.getContext("2d");
 
 
 // This isn't working
-function makeGirlWalk() {
-  clearCanvas();
-  drawGirlStill();
-}
+drawGirlWalk();
 
 
 
