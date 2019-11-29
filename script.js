@@ -1,7 +1,8 @@
-//var canvas = document.querySelector(".game"); - Game is e.g. class id from html 
-//canvas.width = tbc;
-//canvas.height = tbc;
-//var ctx = canvas.getContext("2d");
+var canvas = document.querySelector(".game");
+// - Game is e.g. class id from html
+canvas.width = 700;
+canvas.height = 500;
+var ctx = canvas.getContext("2d");
 
 
 // all figures/objects will go in the state
@@ -11,13 +12,38 @@
 //     x: 250,
 //     y: 250,
 //   },
-//   playertwo: {
-//     x:,
-//     y:,
-//   }
+//
 // }
 
 
+// This isn't working
+function makeGirlWalk() {
+  clearCanvas();
+  drawGirlStill();
+}
+
+
+
+function drawGirlStill() {
+    var girlStill = new Image();
+    girlStill.src = "girl-static-2.png";
+    girlStill.onload = function() {
+    ctx.drawImage(girlStill,0,0,400,400);
+  }
+}
+
+function drawGirlWalk() {
+    var girlWalk = new Image();
+    girlWalk.src = "girl-walking-2.png";
+    girlWalk.onload = function() {
+    ctx.drawImage(girlWalk,0,0,400,400);
+  }
+}
+
+function clearCanvas() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
 // I was thinking we could have a function that moves the player up and down past obstacles.
 //That means we can build in an object detection warning if they collide with something e.g.:
