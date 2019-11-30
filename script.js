@@ -24,33 +24,32 @@ var state = {
 function flipState() {
   if(state.girl.walking === false) {
 console.log("can you see this");
-    state.girl.walking === true;
-    return(state.girl.walking);
+    state.girl.walking = true;
     console.log(state.girl.walking);
 }
     else if (state.girl.walking === true) {
       console.log("what about this");
-      state.girl.walking === false;
-      return(state.girl.walking);
+      state.girl.walking = false;
       console.log(state.girl.walking);
     }
 }
 
-setInterval(flipState(),500);
+setInterval(flipState,500);
 // This isn't working as an animation - need help!
 
 function animateGirl() {
   if (state.girl.walking === true) {
-    clearCanvas();
+    drawBackground();
     drawGirlWalk();
+
   }
   else {
-    clearCanvas();
+    drawBackground();
     drawGirlStill();
   }
 }
 
-setInterval(animateGirl,300);
+setInterval(animateGirl,30);
 
 function drawGirlStill() {
     var girlStill = new Image();
@@ -69,11 +68,18 @@ function drawGirlWalk() {
 }
 
 function clearCanvas() {
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "brown";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function drawBackground() {
+  var background = new Image();
+  background.src = "bg.jpg";
+  background.onload = function() {
+  ctx.drawImage(background,0,0,700,500);
+}
 
+}
 // var coin1 = {
 //   size: 20,
 //   x: Math.floor(Math.random()*(3*canvas.width/10))+(canvas.width/10),
