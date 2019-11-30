@@ -13,8 +13,10 @@ var state = {
   },
   light: {
     bright: false,
+  },
+  crowd: {
+    armsUp: false,
   }
-
 
 //   playerone:{
 //     x: 250,
@@ -42,13 +44,24 @@ function flipStateLight() {
     }
 }
 
+function flipStateCrowd() {
+  if(state.crowd.armsUp === false) {
+    state.crowd.armsUp = true;
+}
+    else if (state.crowd.armsUp === true) {
+      state.crowd.armsUp = false;
+    }
+}
+
 setInterval(flipStateGirl,500);
 setInterval(flipStateLight,50);
+setInterval(flipStateCrowd,100);
 
 function animateCanvas() {
   clearCanvas();
   animateGirl();
   flickerLight();
+  animateCrowd();
 }
 
 function animateGirl() {
@@ -67,7 +80,16 @@ function flickerLight() {
   else {
     drawLightDim();
   }
+}
+
+function animateCrowd() {
+  if (state.crowd.armsUp === true) {
+        drawCrowdArmsUp();
   }
+  else {
+    drawCrowdArmsDown();
+  }
+}
 
 var control = setInterval(animateCanvas,30);
 
@@ -106,6 +128,22 @@ function drawLightDim() {
     lightDim.src = "light-dim.png";
     lightDim.onload = function() {
     ctx.drawImage(lightDim,300,0,200,200);
+  }
+}
+
+function drawCrowdArmsUp() {
+    var armsUp = new Image();
+    armsUp.src = "crowd2.png";
+    armsUp.onload = function() {
+    ctx.drawImage(armsUp,500,100,200,300);
+  }
+}
+
+function drawCrowdArmsDown() {
+    var armsDown = new Image();
+    armsDown.src = "crowd1.png";
+    armsDown.onload = function() {
+    ctx.drawImage(armsDown,500,100,200,300);
   }
 }
 // clear the canvas by redrawing the background each frame
