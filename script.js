@@ -10,6 +10,9 @@ var ctx = canvas.getContext("2d");
 var state = {
   girl: {
     walking: false,
+  },
+  light: {
+    bright: false,
   }
 
 
@@ -21,35 +24,58 @@ var state = {
 }
 
 
-function flipState() {
+function flipStateGirl() {
   if(state.girl.walking === false) {
-console.log("can you see this");
     state.girl.walking = true;
-    console.log(state.girl.walking);
 }
     else if (state.girl.walking === true) {
-      console.log("what about this");
       state.girl.walking = false;
-      console.log(state.girl.walking);
     }
 }
 
-setInterval(flipState,500);
-// This isn't working as an animation - need help!
+function flipStateLight() {
+  if(state.light.bright === false) {
+    state.light.bright = true;
+}
+    else if (state.light.bright === true) {
+      state.light.bright = false;
+    }
+}
+
+setInterval(flipStateGirl,500);
+setInterval(flipStateLight,50);
+
+function animateCanvas() {
+  clearCanvas();
+  animateGirl();
+  flickerLight();
+}
 
 function animateGirl() {
   if (state.girl.walking === true) {
-    drawBackground();
     drawGirlWalk();
-
   }
   else {
-    drawBackground();
     drawGirlStill();
   }
 }
 
-setInterval(animateGirl,30);
+function flickerLight() {
+  if (state.light.bright === true) {
+        drawLightBright();
+  }
+  else {
+    drawLightDim();
+  }
+  }
+
+var control = setInterval(animateCanvas,30);
+
+function pauseGame() {
+  var stateGame = "Paused";
+  console.log(stateGame);
+  clearInterval(control);
+}
 
 function drawGirlStill() {
     var girlStill = new Image();
@@ -67,9 +93,24 @@ function drawGirlWalk() {
   }
 }
 
+function drawLightBright() {
+    var lightBright = new Image();
+    lightBright.src = "light-bright.png";
+    lightBright.onload = function() {
+    ctx.drawImage(lightBright,300,0,200,200);
+  }
+}
+
+function drawLightDim() {
+    var lightDim = new Image();
+    lightDim.src = "light-dim.png";
+    lightDim.onload = function() {
+    ctx.drawImage(lightDim,300,0,200,200);
+  }
+}
+// clear the canvas by redrawing the background each frame
 function clearCanvas() {
-  ctx.fillStyle = "brown";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawBackground();
 }
 
 function drawBackground() {
