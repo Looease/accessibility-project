@@ -9,8 +9,9 @@ var ctx = canvas.getContext("2d");
 
 var state = {
   girl: {
-    walking: false;
+    walking: false,
   }
+
 
 //   playerone:{
 //     x: 250,
@@ -20,18 +21,36 @@ var state = {
 }
 
 
-setTimeout((){ state.girl.walking = true; }, 2000);
+function flipState() {
+  if(state.girl.walking === false) {
+console.log("can you see this");
+    state.girl.walking === true;
+    return(state.girl.walking);
+    console.log(state.girl.walking);
+}
+    else if (state.girl.walking === true) {
+      console.log("what about this");
+      state.girl.walking === false;
+      return(state.girl.walking);
+      console.log(state.girl.walking);
+    }
+}
+
+setInterval(flipState(),500);
 // This isn't working as an animation - need help!
 
 function animateGirl() {
-  clearCanvas();
-  drawGirlStill();
-  clearCanvas();
-  drawGirlWalk();
+  if (state.girl.walking === true) {
+    clearCanvas();
+    drawGirlWalk();
+  }
+  else {
+    clearCanvas();
+    drawGirlStill();
+  }
 }
 
-setInterval(animateGirl,500);
-
+setInterval(animateGirl,300);
 
 function drawGirlStill() {
     var girlStill = new Image();
@@ -55,18 +74,18 @@ function clearCanvas() {
 }
 
 
-var coin1 = {
-  size: 20,
-  x: Math.floor(Math.random()*(3*canvas.width/10))+(canvas.width/10),
-  y: Math.floor(Math.random()*(3*canvas.height/10))+(canvas.height/10),
-  question1:"One of your online friends is",
-  question2: "going to help you with your",
-  question3: "homework, but has asked for",
-  question4: "your password.",
-  question5: "Should you give it to them?",
-  correctAnswer: state.buttons[1]
+// var coin1 = {
+//   size: 20,
+//   x: Math.floor(Math.random()*(3*canvas.width/10))+(canvas.width/10),
+//   y: Math.floor(Math.random()*(3*canvas.height/10))+(canvas.height/10),
+//   question1:"One of your online friends is",
+//   question2: "going to help you with your",
+//   question3: "homework, but has asked for",
+//   question4: "your password.",
+//   question5: "Should you give it to them?",
+//   correctAnswer: state.buttons[1]
 
-}
+
 
 // I was thinking we could have a function that moves the player up and down past obstacles.
 //That means we can build in an object detection warning if they collide with something e.g.:
