@@ -19,6 +19,10 @@ var state = {
   },
   crowd: {
     armsUp: false,
+    appear: people(),
+    x:400,
+    y:1000,
+    speed: 0.
   },
   spacebar: false,
   }
@@ -60,6 +64,7 @@ function animateCanvas() {
   flickerLight();
   animateCrowd();
   moveLight();
+  moveCrowd();
 
 }
 
@@ -136,7 +141,7 @@ function drawCrowdArmsUp() {
     var armsUp = new Image();
     armsUp.src = "crowd2.png";
     armsUp.onload = function() {
-    ctx.drawImage(armsUp,400,190,290,300);
+    ctx.drawImage(armsUp,400,state.crowd.y,300,300);
   }
 }
 
@@ -145,7 +150,7 @@ function drawCrowdArmsDown() {
     var armsDown = new Image();
     armsDown.src = "crowd1.png";
     armsDown.onload = function() {
-    ctx.drawImage(armsDown,400,190,290,300);
+    ctx.drawImage(armsDown,400,state.crowd.y,300,300);
   }
 }
 
@@ -171,6 +176,10 @@ function people(){
 
 function moveLight(e){
   state.light.x  = state.light.x - 1;
+}
+
+function moveCrowd(e){
+  state.crowd.y = state.crowd.y -1;
 }
 
 // var animate = {
