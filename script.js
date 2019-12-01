@@ -13,18 +13,15 @@ var state = {
   },
   light: {
     bright: false,
+    create: lights(),
+    x: 1000,
+    speed:0,
   },
   crowd: {
     armsUp: false,
+  },
+  spacebar: false,
   }
-
-//   playerone:{
-//     x: 250,
-//     y: 250,
-//   },
-//
-}
-
 
 function flipStateGirl() {
   if(state.girl.walking === false) {
@@ -62,6 +59,8 @@ function animateCanvas() {
   animateGirl();
   flickerLight();
   animateCrowd();
+  moveLight();
+
 }
 
 function animateGirl() {
@@ -115,11 +114,12 @@ function drawGirlWalk() {
   }
 }
 
+
 function drawLightBright() {
     var lightBright = new Image();
     lightBright.src = "light-bright.png";
     lightBright.onload = function() {
-    ctx.drawImage(lightBright,300,0,200,200);
+    ctx.drawImage(lightBright,state.light.x,0,200,200);
   }
 }
 
@@ -127,38 +127,142 @@ function drawLightDim() {
     var lightDim = new Image();
     lightDim.src = "light-dim.png";
     lightDim.onload = function() {
-    ctx.drawImage(lightDim,300,0,200,200);
+    ctx.drawImage(lightDim,state.light.x,0,200,200);
   }
 }
+
 
 function drawCrowdArmsUp() {
     var armsUp = new Image();
     armsUp.src = "crowd2.png";
     armsUp.onload = function() {
-    ctx.drawImage(armsUp,500,100,200,300);
+    ctx.drawImage(armsUp,400,190,290,300);
   }
 }
+
 
 function drawCrowdArmsDown() {
     var armsDown = new Image();
     armsDown.src = "crowd1.png";
     armsDown.onload = function() {
-    ctx.drawImage(armsDown,500,100,200,300);
+    ctx.drawImage(armsDown,400,190,290,300);
   }
 }
+
+//Functions
+
+function movingGirl(){
+  drawGirlStill();
+  drawGirlWalk();
+};
+
+function lights(){
+  drawLightBright();
+  drawLightDim();
+};
+
+function people(){
+  drawCrowdArmsUp();
+  drawCrowdArmsDown();
+};
+
+
+//Move things around
+
+function moveLight(e){
+  state.light.x  = state.light.x - 100;
+}
+
+// var animate = {
+//   if
+//   (movingGirl() == true){
+//     state.light.x = state.light.x - 100;
+//   } else (movingGirl() == false);{
+//     state.light.x = 500;
+//   }
+// }
+//
+
+
 // clear the canvas by redrawing the background each frame
 function clearCanvas() {
   drawBackground();
 }
 
+
 function drawBackground() {
   var background = new Image();
   background.src = "bg.jpg";
   background.onload = function() {
-  ctx.drawImage(background,0,0,700,500);
+  ctx.drawImage(background,0,0,700,500)};
 }
 
-}
+
+
+
+
+//
+// var buttons = document.getElementById("body");
+//
+//
+// function upKeyDown(e) {
+//   if (e.keyCode === 38) {
+//     state.upPressed = true;
+//   }
+// }
+// buttons.addEventListener("keypress", myScript);
+//
+//
+// function upKeyUp(e) {
+//   if (e.keyCode === 38) {
+//     state.upPressed = false;
+//   }
+// }
+// buttons.addEventListener("keyup", upKeyUp);
+//
+// function downKeyDown(e) {
+//   if (e.keyCode === 40) {
+//     state.downPressed = true;
+//   }
+// }
+// buttons.addEventListener("keydown", downKeyDown);
+//
+// function downKeyUp(e) {
+//   if (e.keyCode === 40) {
+//     state.downPressed = false;
+//   }
+// }
+// buttons.addEventListener("keyup", downKeyUp);
+//
+// function leftKeyDown(e) {
+//   if (e.keyCode === 37) {
+//     state.leftPressed = true;
+//   }
+// }
+// buttons.addEventListener("keydown", leftKeyDown);
+//
+//   function leftKeyUp(e) {
+//     if (e.keyCode === 37) {
+//       state.leftPressed = false;
+//     }
+//   }
+//   buttons.addEventListener("keyup", leftKeyUp);
+//
+// function rightKeyDown(e) {
+//   if (e.keyCode === 39) {
+//     state.rightPressed = true;
+//   }
+// }
+// buttons.addEventListener("keydown", rightKeyDown);
+//
+// function rightKeyUp(e) {
+//   if (e.keyCode === 39) {
+//     state.rightPressed = false;
+//   }
+// }
+// buttons.addEventListener("keyup", rightKeyUp);
+
+
 // var coin1 = {
 //   size: 20,
 //   x: Math.floor(Math.random()*(3*canvas.width/10))+(canvas.width/10),
@@ -169,35 +273,3 @@ function drawBackground() {
 //   question4: "your password.",
 //   question5: "Should you give it to them?",
 //   correctAnswer: state.buttons[1]
-
-
-
-// I was thinking we could have a function that moves the player up and down past obstacles.
-//That means we can build in an object detection warning if they collide with something e.g.:
-
-//function movePlayer (e){
-//  state.playerone.y = state.playerone.y - 100;
-
-//} canvas.addEventListener("click", movePlayer)
-
-
-
-
-
-
-
-//Then we need all the functions to move things on to the page.
-
-//There will be 1 function to run all the functions
-
-// 1 clear canvas function
-
-//make playerone function
-
-//make flashing light functions
-
-// make people getting in the way function
-
-// make confusing signs function
-
-// make clock ticking function
