@@ -170,7 +170,7 @@ function people(){
 //Move things around
 
 function moveLight(e){
-  state.light.x  = state.light.x - 100;
+  state.light.x  = state.light.x - 1;
 }
 
 // var animate = {
