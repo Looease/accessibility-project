@@ -18,26 +18,26 @@ var state = {
     y: 30,
   },
   trex: {
-    x: 500,
+    x: 1000,
     speed:0,
   },
   light: {
     bright: false,
     // create: lights(),
-    x: 300,
+    x: 800,
     speed:0,
     bullet1:"Autistic people can experience sensory overload",
     bullet2:"Distractions like flickering lights can be unbearable",
     bullet3:"Ensure your public space doesn't have harsh lighting",
   },
   steg: {
-    x: 800,
+    x: 1500,
     speed:0,
   },
   crowd: {
     armsUp: false,
     // appear: people(),
-    x: 1000,
+    x: 2000,
     speed:0,
     height:350,
     width:350,
@@ -46,7 +46,7 @@ var state = {
     bullet3:"special opening times",
   },
   sign: {
-    x: 1300,
+    x: 2400,
     speed:0,
     bullet1:"Text about getting lost",
     bullet2:"pre-event info",
@@ -71,8 +71,15 @@ var state = {
     width:120,
     height: 30,
   },
+  keypad:{
+  upPressed: false,
+  leftPressed: false,
+  rightPressed: false,
+  downPressed: false,
+  },
   obstacles: [],
-}
+  }
+
 
 // This is our obstacles array for the loop in the girlMeetsObstacle function
 state.obstacles = [state.light, state.crowd, state.sign];
@@ -122,6 +129,8 @@ function animateCanvas() {
   moveTRex();
   moveSign();
   girlMeetsObstacle();
+  // tap();
+  // movePlayer();
   }
 
 function animateGirl() {
@@ -301,23 +310,6 @@ function drawInfoPage() {
     ctx.fillText("Understood", state.button.x + 10, state.button.y + 20);
 }
 
-//Functions
-// Louise's code - is this still needed?
-// function movingGirl(){
-//   drawGirlStill();
-//   drawGirlWalk();
-// };
-//
-// function lights(){
-//   drawLightBright();
-//   drawLightDim();
-// };
-//
-// function people(){
-//   drawCrowdArmsUp();
-//   drawCrowdArmsDown();
-// };
-
 
 //Move things around
 
@@ -341,17 +333,6 @@ function moveSign(e){
   state.sign.x = state.sign.x - 1;
 }
 
-// Louise's old code - is it still needed?
-// var animate = {
-//   if
-//   (movingGirl() == true){
-//     state.light.x = state.light.x - 100;
-//   } else (movingGirl() == false);{
-//     state.light.x = 500;
-//   }
-// }
-//
-
 
 // clear the canvas by redrawing the background each frame
 function clearCanvas() {
@@ -365,6 +346,108 @@ function drawBackground() {
   background.onload = function() {
   ctx.drawImage(background,0,0,canvas.width, canvas.height)};
 }
+
+
+//Move girl around
+
+
+function movePlayer() {
+  if (state.upPressed) {
+      state.girl.y = state.girl.y - 4;
+    }
+   else if (state.downPressed) {
+      state.girl.y = state.girl.y + 4;
+  } else if (state.leftPressed) {
+      state.girl.x = state.girl.x - 4;
+  } else if (state.rightPressed) {
+      state.girl.x = state.girl.x + 4;
+  } else {
+      state.girl.x = state.girl.x;
+      state.girl.y = state.girl.y;
+  }
+}
+
+//Keypad moving
+
+// function tap (e){
+//   upKeyDown(e);
+//   upKeyUp(e);
+//   downKeyDown(e);
+//   downKeyUp(e);
+//   leftKeyDown(e);
+//   leftKeyUp(e);
+//   rightKeyDown(e);
+//   rightKeyUp(e);
+// }
+//
+// function upKeyDown(e) {
+//   if (state.girl.y === 38) {
+//     state.keypad.upPressed = true;
+//   }
+// }
+// canvas.addEventListener("keydown", upKeyDown);
+//
+//
+//
+// function upKeyUp(e) {
+//   if (state.girl.y  === 38) {
+//     state.keypad.upPressed = false;
+//   }
+// }
+// canvas.addEventListener("keyup", upKeyUp);
+//
+//
+//
+// function downKeyDown(e) {
+//   if (state.girl.y === 40) {
+//     state.keypad.downPressed = true;
+//   }
+// }
+// canvas.addEventListener("keydown", downKeyDown);
+//
+// function downKeyUp(e) {
+//   if (state.girl.y  === 40) {
+//     state.keypad.downPressed = false;
+//   }
+// }
+// canvas.addEventListener("keyup", downKeyUp);
+//
+// function leftKeyDown(e) {
+//   if (state.girl.x  === 37) {
+//     state.keypad.leftPressed = true;
+//   }
+// }
+// canvas.addEventListener("keydown", leftKeyDown);
+//
+//   function leftKeyUp(e) {
+//     if (state.girl.x=== 37) {
+//       state.keypad.leftPressed = false;
+//     }
+//   }
+//   canvas.addEventListener("keyup", leftKeyUp);
+//
+// function rightKeyDown(e) {
+//   if (state.girl.x === 39) {
+//     state.keypad.rightPressed = true;
+//   }
+// }
+// canvas.addEventListener("keydown", rightKeyDown);
+//
+// function rightKeyUp(e) {
+//   if (state.girl.x === 39) {
+//     state.rightPressed = false;
+//   }
+// }
+// canvas.addEventListener("keyup", rightKeyUp);
+//
+//
+//
+
+
+
+
+
+
 
 
 
