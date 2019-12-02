@@ -18,51 +18,41 @@ var state = {
     y: 30,
   },
   trex: {
-    x: 400,
+    x: 500,
     speed:0,
   },
   light: {
     bright: false,
     create: lights(),
-    x: 1000,
+    x: 300,
     speed:0,
+    bullet1:"Autistic people can experience sensory overload",
+    bullet2:"Distractions like flickering lights can be unbearable",
+    bullet3:"Ensure your public space doesn't have harsh lighting",
   },
   steg: {
-    x: 1300,
+    x: 800,
     speed:0,
   },
   crowd: {
     armsUp: false,
     appear: people(),
-    x: 1800,
+    x: 1000,
     speed:0,
     height:350,
     width:350,
+    bullet1:"Text about crowds",
+    bullet2:"quiet spaces",
+    bullet3:"special opening times",
   },
   sign: {
-    x: 2300,
+    x: 1300,
     speed:0,
+    bullet1:"Text about getting lost",
+    bullet2:"pre-event info",
+    bullet3:"easy to understand info",
   },
   spacebar: false,
-// popUp nested objects
-  popUp: {
-    lights: {
-      x: 400,
-      y: 50,
-      bullet1:"Autistic people can experience sensory overload",
-      bullet2:"Distractions like flickering lights can be unbearable",
-      bullet3:"Ensure your public space doesn't have harsh lighting",
-    },
-    crowd: {
-      x: 400,
-      y: 50,
-    },
-    sign: {
-      x: 400,
-      y: 50,
-    },
-  },
-  // popUp nested object ends here
   infoPageBorder: {
     x: 40,
     y: 40,
@@ -80,8 +70,22 @@ var state = {
     y: canvas.height - 100,
     width:120,
     height: 30,
-  }
+  },
+  obstacles: [],
 }
+
+var obstacle1 = {
+
+}
+var obstacle2 = {
+
+}
+var obstacle3 = {
+
+}
+// This is our obstacles array for the loop in the girlMeetsObstacle function
+state.obstacles = [state.light, state.crowd, state.sign];
+
 function flipStateGirl() {
   if(state.girl.walking === false) {
     state.girl.walking = true;
@@ -126,6 +130,7 @@ function animateCanvas() {
   moveSteg();
   moveTRex();
   moveSign();
+  girlMeetsObstacle();
   }
 
 function animateGirl() {
@@ -167,6 +172,42 @@ function pauseGame() {
   console.log(stateGame);
   clearInterval(control);
 }
+// this pauses the game when the girl meets the obstacle and draws the popup box and fills it with text. Not working on the loop properly
+// so the loop is currently set to stop after one round.
+function girlMeetsObstacle() {
+  for (var i = 0; i < 1; i = i + 1) {
+    var obstacle = state.obstacles[i];
+    if (state.light.x <= state.girl.x + 230) {
+		state.encounteredObstacle = state.obstacles[i];
+    console.log("I've encountered obstacle", i);
+		state.gameMode.info = true;
+    if (state.gameMode.info === true) {
+    pauseGame();
+    console.log("if you are stuck here, you can temporarily blank out the girlMeetsObstacle function from animateCanvas")
+    setInterval(fillInfoPage, 300);
+    }
+  }
+}
+}
+// This function fills the popup box with text and changes with each loop.  Can't seem to stop it at the moment!
+function fillInfoPage() {
+  if (state.gameMode.info === true) {
+  drawInfoPage();
+  ctx.fillStyle = "black";
+  ctx.font = "20px Tahoma";
+  ctx.fillText(state.encounteredObstacle.bullet1, 120, 100);
+  ctx.fillText(state.encounteredObstacle.bullet2, 120, 200);
+  ctx.fillText(state.encounteredObstacle.bullet3, 120, 300);
+  }
+}
+
+// next: set up event handler to click the "understand" button
+// when Understood button is clicked
+// function clearInfoPage(){
+  // redraw canvas
+// restart animation and move the loop on...
+
+
 // 2 functions to draw girl walking
 function drawGirlStill() {
     var girlStill = new Image();
@@ -244,23 +285,8 @@ function drawSign() {
   }
 }
 
-// function meetObstacle() {
-//   pauseGame();
-//   drawInfoPage();
-//   console.log("i've drawn the info page");
-  // next: set up event handler to click button
-// }
-
-// when Understood button is clicked
-// function clearInfoPage(){
-  // redraw canvas
-// restart animation
-
-// }
-
-
+// This draws the popup box without the text (same for all three obstacles)
 function drawInfoPage() {
-  // if(state.gameMode.info) {
   ctx.fillStyle = "black";
   ctx.fillRect(
     state.infoPageBorder.x,
@@ -275,12 +301,6 @@ function drawInfoPage() {
     state.infoPage.width,
     state.infoPage.height,
   );
-  ctx.fillStyle = "black";
-	ctx.font = "20px Tahoma";
-	ctx.fillText(state.popUp.lights.bullet1, 120, 100);
-  ctx.fillText(state.popUp.lights.bullet2, 120, 200);
-  ctx.fillText(state.popUp.lights.bullet3, 120, 300);
-
   ctx.fillStyle = 'green';
   ctx.fillRect(state.button.x, state.button.y, state.button.width, state.button.height);
     ctx.fillStyle = "white";
