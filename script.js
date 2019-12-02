@@ -8,8 +8,9 @@ var ctx = canvas.getContext("2d");
 // all figures/objects will go in the state
 
 var state = {
-  movement: {
+  gameMode: {
     paused: false,
+    info: false,
   },
   girl: {
     walking: false,
@@ -28,14 +29,12 @@ var state = {
   },
   steg: {
     x: 1300,
-    speed:0
+    speed:0,
   },
   crowd: {
     armsUp: false,
     appear: people(),
     x: 1800,
-    // x:350,
-    // y:1000,
     speed:0,
     height:350,
     width:350,
@@ -45,8 +44,44 @@ var state = {
     speed:0,
   },
   spacebar: false,
+// popUp nested objects
+  popUp: {
+    lights: {
+      x: 400,
+      y: 50,
+      bullet1:"Autistic people can experience sensory overload",
+      bullet2:"Distractions like flickering lights can be unbearable",
+      bullet3:"Ensure your public space doesn't have harsh lighting",
+    },
+    crowd: {
+      x: 400,
+      y: 50,
+    },
+    sign: {
+      x: 400,
+      y: 50,
+    },
+  },
+  // popUp nested object ends here
+  infoPageBorder: {
+    x: 40,
+    y: 40,
+    width: canvas.width - 80,
+    height: canvas.height - 80,
+  },
+  infoPage: {
+  x: 50,
+  y: 50,
+  width: canvas.width-100,
+  height:canvas.height-100,
+  },
+  button: {
+    x: canvas.width/2 - 50,
+    y: canvas.height - 100,
+    width:120,
+    height: 30,
   }
-
+}
 function flipStateGirl() {
   if(state.girl.walking === false) {
     state.girl.walking = true;
@@ -91,7 +126,7 @@ function animateCanvas() {
   moveSteg();
   moveTRex();
   moveSign();
-}
+  }
 
 function animateGirl() {
   if (state.girl.walking === true) {
@@ -110,6 +145,7 @@ function flickerLight() {
     drawLightDim();
   }
 }
+
 // function makes arms go up and down and stops drawing the crowd after the girl has met them
 function animateCrowd() {
   if(state.crowd.x > state.girl.x + 230) {
@@ -131,7 +167,7 @@ function pauseGame() {
   console.log(stateGame);
   clearInterval(control);
 }
-
+// 2 functions to draw girl walking
 function drawGirlStill() {
     var girlStill = new Image();
     girlStill.src = "girl-static-2.png";
@@ -148,7 +184,7 @@ function drawGirlWalk() {
   }
 }
 
-
+// 2 functions to draw light flickering
 function drawLightBright() {
     var lightBright = new Image();
     lightBright.src = "light-bright.png";
@@ -165,7 +201,7 @@ function drawLightDim() {
   }
 }
 
-
+// 2 functions to draw crowd flapping
 function drawCrowdArmsUp() {
     var armsUp = new Image();
     armsUp.src = "crowd2.png";
@@ -173,7 +209,6 @@ function drawCrowdArmsUp() {
     ctx.drawImage(armsUp,state.crowd.x,50,280,360);
   }
 }
-
 
 function drawCrowdArmsDown() {
     var armsDown = new Image();
@@ -183,6 +218,7 @@ function drawCrowdArmsDown() {
   }
 }
 
+// 2 functions to draw static dinosaurs pictures
 function drawTRex() {
   var tRex = new Image();
   tRex.src = "trex.png";
@@ -199,6 +235,7 @@ function drawSteg() {
   }
 }
 
+// function to draw sign
 function drawSign() {
   var sign = new Image();
   sign.src = "confusing-sign.png";
@@ -206,6 +243,50 @@ function drawSign() {
   ctx.drawImage(sign,state.sign.x, 50,300,200);
   }
 }
+
+// function meetObstacle() {
+//   pauseGame();
+//   drawInfoPage();
+//   console.log("i've drawn the info page");
+  // next: set up event handler to click button
+// }
+
+// when Understood button is clicked
+// function clearInfoPage(){
+  // redraw canvas
+// restart animation
+
+// }
+
+
+function drawInfoPage() {
+  // if(state.gameMode.info) {
+  ctx.fillStyle = "black";
+  ctx.fillRect(
+    state.infoPageBorder.x,
+    state.infoPageBorder.y,
+    state.infoPageBorder.width,
+    state.infoPageBorder.height
+  );
+  ctx.fillStyle = "white";
+  ctx.fillRect(
+    state.infoPage.x,
+    state.infoPage.y,
+    state.infoPage.width,
+    state.infoPage.height,
+  );
+  ctx.fillStyle = "black";
+	ctx.font = "20px Tahoma";
+	ctx.fillText(state.popUp.lights.bullet1, 120, 100);
+  ctx.fillText(state.popUp.lights.bullet2, 120, 200);
+  ctx.fillText(state.popUp.lights.bullet3, 120, 300);
+
+  ctx.fillStyle = 'green';
+  ctx.fillRect(state.button.x, state.button.y, state.button.width, state.button.height);
+    ctx.fillStyle = "white";
+    ctx.fillText("Understood", state.button.x + 10, state.button.y + 20);
+}
+
 //Functions
 
 function movingGirl(){
@@ -231,12 +312,7 @@ function moveLight(e){
 }
 
 function moveCrowd(e){
-  // if (true) {
   state.crowd.x = state.crowd.x -1;
-//   }
-// else {
-//   state.crowd.y = 400;
-// }
 }
 
 function moveSteg(e){
