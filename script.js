@@ -8,8 +8,13 @@ var ctx = canvas.getContext("2d");
 // all figures/objects will go in the state
 
 var state = {
+  movement: {
+    paused: false,
+  },
   girl: {
     walking: false,
+    x: 0,
+    y: 30,
   },
   trex: {
     x: 400,
@@ -105,8 +110,9 @@ function flickerLight() {
     drawLightDim();
   }
 }
-
+// function makes arms go up and down and stops drawing the crowd after the girl has met them
 function animateCrowd() {
+  if(state.crowd.x > state.girl.x + 230) {
   if (state.crowd.armsUp === true) {
         drawCrowdArmsUp();
   }
@@ -114,8 +120,10 @@ function animateCrowd() {
     drawCrowdArmsDown();
   }
 }
+else {;}
+}
 
-// !!! This animates the canvas and controls the speed of the animation !!!
+// !!! This animates the canvas by refreshing the animateCanvas function repeatedly !!!
 var control = setInterval(animateCanvas,30);
 
 function pauseGame() {
@@ -128,7 +136,7 @@ function drawGirlStill() {
     var girlStill = new Image();
     girlStill.src = "girl-static-2.png";
     girlStill.onload = function() {
-    ctx.drawImage(girlStill,0,30,400,400);
+    ctx.drawImage(girlStill, state.girl.x,state.girl.y,400,400);
   }
 }
 
@@ -136,7 +144,7 @@ function drawGirlWalk() {
     var girlWalk = new Image();
     girlWalk.src = "girl-walking-2.png";
     girlWalk.onload = function() {
-    ctx.drawImage(girlWalk,0,30,400,400);
+    ctx.drawImage(girlWalk,state.girl.x, state.girl.y,400,400);
   }
 }
 
