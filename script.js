@@ -1,7 +1,7 @@
 var canvas = document.querySelector(".game");
 // - Game is e.g. class id from html
 canvas.width = 700;
-canvas.height = 500;
+canvas.height = 450;
 var ctx = canvas.getContext("2d");
 
 
@@ -11,20 +11,33 @@ var state = {
   girl: {
     walking: false,
   },
+  trex: {
+    x: 400,
+    speed:0,
+  },
   light: {
     bright: false,
     create: lights(),
     x: 1000,
     speed:0,
   },
+  steg: {
+    x: 1300,
+    speed:0
+  },
   crowd: {
     armsUp: false,
     appear: people(),
-    x:350,
-    y:1000,
+    x: 1800,
+    // x:350,
+    // y:1000,
     speed:0,
     height:350,
     width:350,
+  },
+  sign: {
+    x: 2300,
+    speed:0,
   },
   spacebar: false,
   }
@@ -62,12 +75,17 @@ setInterval(flipStateCrowd,100);
 
 function animateCanvas() {
   clearCanvas();
-  animateGirl();
+  drawTRex();
+  drawSteg();
+  drawSign();
   flickerLight();
+  animateGirl();
   animateCrowd();
   moveLight();
   moveCrowd();
-
+  moveSteg();
+  moveTRex();
+  moveSign();
 }
 
 function animateGirl() {
@@ -97,6 +115,7 @@ function animateCrowd() {
   }
 }
 
+// !!! This animates the canvas and controls the speed of the animation !!!
 var control = setInterval(animateCanvas,30);
 
 function pauseGame() {
@@ -109,7 +128,7 @@ function drawGirlStill() {
     var girlStill = new Image();
     girlStill.src = "girl-static-2.png";
     girlStill.onload = function() {
-    ctx.drawImage(girlStill,0,0,400,400);
+    ctx.drawImage(girlStill,0,30,400,400);
   }
 }
 
@@ -117,7 +136,7 @@ function drawGirlWalk() {
     var girlWalk = new Image();
     girlWalk.src = "girl-walking-2.png";
     girlWalk.onload = function() {
-    ctx.drawImage(girlWalk,0,0,400,400);
+    ctx.drawImage(girlWalk,0,30,400,400);
   }
 }
 
@@ -143,7 +162,7 @@ function drawCrowdArmsUp() {
     var armsUp = new Image();
     armsUp.src = "crowd2.png";
     armsUp.onload = function() {
-    ctx.drawImage(armsUp,state.crowd.x,state.crowd.y,350,350);
+    ctx.drawImage(armsUp,state.crowd.x,50,280,360);
   }
 }
 
@@ -152,10 +171,33 @@ function drawCrowdArmsDown() {
     var armsDown = new Image();
     armsDown.src = "crowd1.png";
     armsDown.onload = function() {
-    ctx.drawImage(armsDown,state.crowd.x,state.crowd.y,350,350);
+    ctx.drawImage(armsDown,state.crowd.x,50,280,360);
   }
 }
 
+function drawTRex() {
+  var tRex = new Image();
+  tRex.src = "trex.png";
+  tRex.onload = function() {
+  ctx.drawImage(tRex,state.trex.x, 50,300,200);
+  }
+}
+
+function drawSteg() {
+  var steg = new Image();
+  steg.src = "stegosaurus.png";
+  steg.onload = function() {
+  ctx.drawImage(steg,state.steg.x, 50,300,200);
+  }
+}
+
+function drawSign() {
+  var sign = new Image();
+  sign.src = "confusing-sign.png";
+  sign.onload = function() {
+  ctx.drawImage(sign,state.sign.x, 50,300,200);
+  }
+}
 //Functions
 
 function movingGirl(){
@@ -181,12 +223,24 @@ function moveLight(e){
 }
 
 function moveCrowd(e){
-  if (true) {
-  state.crowd.y = state.crowd.y -1;
-  }
-else {
-  state.crowd.y = 400;
+  // if (true) {
+  state.crowd.x = state.crowd.x -1;
+//   }
+// else {
+//   state.crowd.y = 400;
+// }
 }
+
+function moveSteg(e){
+  state.steg.x  = state.steg.x - 1;
+}
+
+function moveTRex(e){
+  state.trex.x = state.trex.x - 1;
+}
+
+function moveSign(e){
+  state.sign.x = state.sign.x - 1;
 }
 
 
@@ -209,9 +263,9 @@ function clearCanvas() {
 
 function drawBackground() {
   var background = new Image();
-  background.src = "bg.jpg";
+  background.src = "plain-bg2.png";
   background.onload = function() {
-  ctx.drawImage(background,0,0,700,500)};
+  ctx.drawImage(background,0,0,canvas.width, canvas.height)};
 }
 
 
