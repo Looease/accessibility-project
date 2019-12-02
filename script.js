@@ -23,7 +23,7 @@ var state = {
   },
   light: {
     bright: false,
-    create: lights(),
+    // create: lights(),
     x: 300,
     speed:0,
     bullet1:"Autistic people can experience sensory overload",
@@ -36,7 +36,7 @@ var state = {
   },
   crowd: {
     armsUp: false,
-    appear: people(),
+    // appear: people(),
     x: 1000,
     speed:0,
     height:350,
@@ -74,15 +74,6 @@ var state = {
   obstacles: [],
 }
 
-var obstacle1 = {
-
-}
-var obstacle2 = {
-
-}
-var obstacle3 = {
-
-}
 // This is our obstacles array for the loop in the girlMeetsObstacle function
 state.obstacles = [state.light, state.crowd, state.sign];
 
@@ -168,9 +159,10 @@ else {;}
 var control = setInterval(animateCanvas,30);
 
 function pauseGame() {
-  var stateGame = "Paused";
-  console.log(stateGame);
   clearInterval(control);
+  state.gameMode.paused = true;
+  console.log("gameMode.paused=", state.gameMode.paused);
+
 }
 // this pauses the game when the girl meets the obstacle and draws the popup box and fills it with text. Not working on the loop properly
 // so the loop is currently set to stop after one round.
@@ -205,6 +197,8 @@ function fillInfoPage() {
 // when Understood button is clicked
 // function clearInfoPage(){
   // redraw canvas
+  // flip gameMode back to info = false
+  // flip gameMode back to paused = false
 // restart animation and move the loop on...
 
 
@@ -308,21 +302,21 @@ function drawInfoPage() {
 }
 
 //Functions
-
-function movingGirl(){
-  drawGirlStill();
-  drawGirlWalk();
-};
-
-function lights(){
-  drawLightBright();
-  drawLightDim();
-};
-
-function people(){
-  drawCrowdArmsUp();
-  drawCrowdArmsDown();
-};
+// Louise's code - is this still needed?
+// function movingGirl(){
+//   drawGirlStill();
+//   drawGirlWalk();
+// };
+//
+// function lights(){
+//   drawLightBright();
+//   drawLightDim();
+// };
+//
+// function people(){
+//   drawCrowdArmsUp();
+//   drawCrowdArmsDown();
+// };
 
 
 //Move things around
@@ -347,7 +341,7 @@ function moveSign(e){
   state.sign.x = state.sign.x - 1;
 }
 
-
+// Louise's old code - is it still needed?
 // var animate = {
 //   if
 //   (movingGirl() == true){
@@ -364,7 +358,7 @@ function clearCanvas() {
   drawBackground();
 }
 
-
+// This is called in clearCanvas
 function drawBackground() {
   var background = new Image();
   background.src = "plain-bg2.png";
