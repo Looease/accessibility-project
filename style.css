@@ -3,7 +3,7 @@
   width: 75%;
   margin: 0 auto;
   display: block;
-  background-image: url(bg.jpg);
+  background-image: url(plain-bg2.png);
   background-size: 100% 100%;
 
 }
@@ -46,4 +46,35 @@ h1{
 .crowd{
   width: 400px;
   height: 400px;
+}
+
+
+
+
+/*Styling for Page 1*/
+
+.sectionflexcontainer{
+  display:flex;
+}
+
+.headerflexcontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.articleflexcontainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  max-width: 50%;
+}
+
+.asideflexconrainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: right;
 }
