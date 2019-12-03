@@ -8,6 +8,7 @@ var ctx = canvas.getContext("2d");
 // all figures/objects will go in the state
 
 var state = {
+    keyPressed: false,
   gameMode: {
     paused: false,
     info: false,
@@ -79,6 +80,8 @@ var state = {
   },
   obstacles: [],
   }
+
+
 
 
 // This is our obstacles array for the loop in the girlMeetsObstacle function
@@ -202,6 +205,14 @@ function fillInfoPage() {
   }
 }
 
+canvas.addEventListener("click", clearPopUp);
+
+function clearPopUp(e) {
+  state.gameMode.info = false;
+  state.light.x = 10000;
+  console.log("make the canvas disappear");
+  animateCanvas();
+}
 // next: set up event handler to click the "understand" button
 // when Understood button is clicked
 // function clearInfoPage(){
@@ -349,21 +360,40 @@ function drawBackground() {
 
 
 
-//Keypad moving
+//Spacebar pausing game
 
-function upKeyDown(){
-  state.girl.y = state.girl.y - 10
+function pause () {
+  if (state.gameMode.paused){
+      clearInterval(control);
+  } else {
+    control = setInterval(animateCanvas,30);
+  }
+};
+
+function handleKeyDown(e) {
+  if (e.code === "Space") {
+
+    // state.keyPressed = true;
+    state.gameMode.paused = !state.gameMode.paused;
+    pause();
+    console.log(state.gameMode)
+  }
 }
-document.addEventListener("keydown", upKeyDown);
+document.addEventListener("keydown", handleKeyDown);
 
 
 
 
+
+
+
+//Girl Jumping
+//
 // function leftKeyDown() {
-//   state.girl.y = state.girl.y + 10
+//   state.girl.y = state.girl.y -15 + 10;
 // }
 // document.addEventListener("keydown", leftKeyDown);
-
+//
 
 
 
