@@ -1,3 +1,8 @@
+html{
+  margin: 0;
+  padding: 0;
+}
+
 body{
   margin: 0;
   padding: 0;
@@ -49,7 +54,7 @@ h1{
 .playerBox{
   height: 300px;
   width: 250px;
-  background: url(character-man-walking.png);
+  background: url(Character-man.gif);
   background-size: center;
   background-position: center;
   background-color: #FFC07C;
@@ -89,7 +94,23 @@ h1{
   display: block;
 }
 
-.button{
+
+.flexcontainer2
+{
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+}
+
+.button
+{
   background-color: #FFC07C;
   border-style: solid;
   border-color: #bf9b30;
