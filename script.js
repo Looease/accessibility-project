@@ -48,7 +48,7 @@ var state = {
   sign: {
     x: 2400,
     speed:0,
-    bullet1:"Text about getting lost",
+    bullet1:"The world can seem a very unpredictable and confusing place to autistic people, something like a ...",
     bullet2:"pre-event info",
     bullet3:"easy to understand info",
   },
