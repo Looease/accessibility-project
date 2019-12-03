@@ -18,8 +18,12 @@ h1{
   text-align: center;
   padding: 15px;
   font-size: 36px;
-
 }
+
+h2,p{
+  font-family: 'Abel', sans-serif;
+}
+
 .body1{
   background-image: url(tate3.jpg);
 }
@@ -49,8 +53,6 @@ h1{
 }
 
 
-
-
 /*Styling for Page 1*/
 
 .sectionflexcontainer{
@@ -68,8 +70,9 @@ h1{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   max-width: 50%;
+  padding-left: 11%;
 }
 
 .asideflexconrainer{
@@ -77,4 +80,25 @@ h1{
   flex-direction: column;
   align-items: center;
   justify-content: right;
+}
+
+.submit{
+  background-color: white;
+  font-size: 20px;
+  padding: 8px 20px;
+  border: 2px solid #FB4B4E;
+  width: 40%;
+  margin-left: 25px;
+  font-family: 'Abel', sans-serif;
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+
+.submit:hover{
+  background-color: #FB4B4E;
+  border-radius: 5px;
+}
+
+#map{
+  height: 300px;
 }

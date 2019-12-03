@@ -42,9 +42,9 @@ var state = {
     speed:0,
     height:350,
     width:350,
-    bullet1:"Text about crowds",
-    bullet2:"quiet spaces",
-    bullet3:"special opening times",
+    bullet1:"Large crowds can provoke anxiety and ultimately overpower a person’s ability to control him or herself",
+    bullet2:"Introduce quiet areas where individuals are able to relax and take a break",
+    bullet3:"Offer an 'Early Birds' opening time solely dedicated to people who would benefit from visiting a hustle and bustle-free environment",
   },
   sign: {
     x: 2400,

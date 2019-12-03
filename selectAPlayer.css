@@ -1,3 +1,8 @@
+html{
+  margin: 0;
+  padding: 0;
+}
+
 body{
   margin: 0;
   padding: 0;
@@ -47,9 +52,9 @@ h1{
 }
 
 .playerBox{
-  height: 300px;
+  height: 280px;
   width: 250px;
-  background: url(character-man-walking.png);
+  background: url(Character-man.gif);
   background-size: center;
   background-position: center;
   background-color: #FFC07C;
@@ -61,7 +66,7 @@ h1{
 }
 
 .playerBox2{
-  height: 300px;
+  height: 280px;
   width: 250px;
   background: url(girl-moving-2.gif);
   background-size: center;
@@ -75,9 +80,9 @@ h1{
 }
 
 .playerBox3{
-  height: 300px;
+  height: 280px;
   width: 250px;
-  background: url(character.png);
+  background: url(character-person.gif);
   background-size: center;
   background-position: center;
   background-repeat: none;
@@ -89,14 +94,63 @@ h1{
   display: block;
 }
 
-.button{
+
+.flexcontainer2
+{
+  width: 100%;
+  /* height: 400px; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+
+
+.button1
+{
   background-color: #FFC07C;
   border-style: solid;
   border-color: #bf9b30;
+  border-radius: 10px;
   color: white;
-  padding: 15px 32px;
+  /* padding: 15px 32px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 25px;
+  width: 250px;
+
+
+}
+
+.button2
+{
+  background-color: #FFC07C;
+  border-style: solid;
+  border-color: #bf9b30;
+  border-radius: 10px;
+  color: white;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  width: 250px;
+}
+
+.button3
+{
+  background-color: #FFC07C;
+  border-style: solid;
+  border-color: #bf9b30;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  width: 250px;
 }
