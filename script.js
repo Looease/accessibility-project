@@ -351,41 +351,8 @@ function drawBackground() {
 
 //Keypad moving
 
-//first try
-
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
-
-var rightPressed = false;
-var leftPressed = false;
-var upPressed = false;
-var downPressed = false;
-
-function keyDownHandler(event) {
-    if(event.keyCode == 39) {
-        rightPressed = true;
-    }
-    else if(event.keyCode == 37) {
-        leftPressed = true;
-    }
-    if(event.keyCode == 40) {
-    	downPressed = true;
-    }
-    else if(event.keyCode == 38) {
-    	upPressed = true;
-    }
-}
-
-
-//second try
-
-
-
-//Simple girl moving.
-
-
 function upKeyDown(){
-  state.girl.y = state.girl.y - 30
+  state.girl.y = state.girl.y - 10
 }
 document.addEventListener("keydown", upKeyDown);
 
