@@ -37,6 +37,7 @@ h1{
   transform: translate(-50%,-50%);
   box-sizing: border-box;
   border-radius: 5%;
+  border: 5px solid #bf9b30;
   padding: 70px 30px;
 }
 
