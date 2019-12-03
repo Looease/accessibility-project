@@ -348,106 +348,54 @@ function drawBackground() {
 }
 
 
-//Move girl around
-
-
-function movePlayer() {
-  if (state.upPressed) {
-      state.girl.y = state.girl.y - 4;
-    }
-   else if (state.downPressed) {
-      state.girl.y = state.girl.y + 4;
-  } else if (state.leftPressed) {
-      state.girl.x = state.girl.x - 4;
-  } else if (state.rightPressed) {
-      state.girl.x = state.girl.x + 4;
-  } else {
-      state.girl.x = state.girl.x;
-      state.girl.y = state.girl.y;
-  }
-}
 
 //Keypad moving
 
-// function tap (e){
-//   upKeyDown(e);
-//   upKeyUp(e);
-//   downKeyDown(e);
-//   downKeyUp(e);
-//   leftKeyDown(e);
-//   leftKeyUp(e);
-//   rightKeyDown(e);
-//   rightKeyUp(e);
-// }
-//
-// function upKeyDown(e) {
-//   if (state.girl.y === 38) {
-//     state.keypad.upPressed = true;
-//   }
-// }
-// canvas.addEventListener("keydown", upKeyDown);
-//
-//
-//
-// function upKeyUp(e) {
-//   if (state.girl.y  === 38) {
-//     state.keypad.upPressed = false;
-//   }
-// }
-// canvas.addEventListener("keyup", upKeyUp);
-//
-//
-//
-// function downKeyDown(e) {
-//   if (state.girl.y === 40) {
-//     state.keypad.downPressed = true;
-//   }
-// }
-// canvas.addEventListener("keydown", downKeyDown);
-//
-// function downKeyUp(e) {
-//   if (state.girl.y  === 40) {
-//     state.keypad.downPressed = false;
-//   }
-// }
-// canvas.addEventListener("keyup", downKeyUp);
-//
-// function leftKeyDown(e) {
-//   if (state.girl.x  === 37) {
-//     state.keypad.leftPressed = true;
-//   }
-// }
-// canvas.addEventListener("keydown", leftKeyDown);
-//
-//   function leftKeyUp(e) {
-//     if (state.girl.x=== 37) {
-//       state.keypad.leftPressed = false;
-//     }
-//   }
-//   canvas.addEventListener("keyup", leftKeyUp);
-//
-// function rightKeyDown(e) {
-//   if (state.girl.x === 39) {
-//     state.keypad.rightPressed = true;
-//   }
-// }
-// canvas.addEventListener("keydown", rightKeyDown);
-//
-// function rightKeyUp(e) {
-//   if (state.girl.x === 39) {
-//     state.rightPressed = false;
-//   }
-// }
-// canvas.addEventListener("keyup", rightKeyUp);
-//
-//
-//
+//first try
+
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+
+var rightPressed = false;
+var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
+
+function keyDownHandler(event) {
+    if(event.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(event.keyCode == 37) {
+        leftPressed = true;
+    }
+    if(event.keyCode == 40) {
+    	downPressed = true;
+    }
+    else if(event.keyCode == 38) {
+    	upPressed = true;
+    }
+}
+
+
+//second try
+
+
+
+//Simple girl moving.
+
+
+function upKeyDown(){
+  state.girl.y = state.girl.y - 30
+}
+document.addEventListener("keydown", upKeyDown);
 
 
 
 
-
-
+// function leftKeyDown() {
+//   state.girl.y = state.girl.y + 10
+// }
+// document.addEventListener("keydown", leftKeyDown);
 
 
 
