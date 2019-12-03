@@ -360,7 +360,7 @@ function drawBackground() {
 
 
 
-//Spacebar pausing game
+//Spacebar to pause game
 
 function pause () {
   if (state.gameMode.paused){
