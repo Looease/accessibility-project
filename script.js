@@ -19,26 +19,26 @@ var state = {
     y: 30,
   },
   trex: {
-    x: 1000,
+    x: 400,
     speed:0,
   },
   light: {
     bright: false,
     // create: lights(),
-    x: 800,
+    x: 850,
     speed:0,
     bullet1:"Autistic people can experience sensory overload",
     bullet2:"Distractions like flickering lights can be unbearable",
     bullet3:"Ensure your public space doesn't have harsh lighting",
   },
   steg: {
-    x: 1500,
+    x: 1100,
     speed:0,
   },
   crowd: {
     armsUp: false,
     // appear: people(),
-    x: 2000,
+    x: 1550,
     speed:0,
     height:350,
     width:350,
@@ -47,7 +47,7 @@ var state = {
     bullet3:"Offer an 'Early Birds' opening time solely dedicated to people who would benefit from visiting a hustle and bustle-free environment",
   },
   sign: {
-    x: 2400,
+    x: 1900,
     speed:0,
     bullet1:"The world can seem a very unpredictable and confusing place to autistic people, something like a ...",
     bullet2:"pre-event info",
@@ -173,21 +173,22 @@ var control = setInterval(animateCanvas,30);
 function pauseGame() {
   clearInterval(control);
   state.gameMode.paused = true;
-  console.log("gameMode.paused=", state.gameMode.paused);
+  console.log(state.gameMode);
 
 }
 // this pauses the game when the girl meets the obstacle and draws the popup box and fills it with text. Not working on the loop properly
 // so the loop is currently set to stop after one round.
 function girlMeetsObstacle() {
-  for (var i = 0; i < 1; i = i + 1) {
+  for (var i = 0; i < 3; i = i + 1) {
     var obstacle = state.obstacles[i];
-    if (state.light.x <= state.girl.x + 230) {
-		state.encounteredObstacle = state.obstacles[i];
+    if (obstacle.x <= state.girl.x + 280) {
+		state.encounteredObstacle = obstacle;
     console.log("I've encountered obstacle", i);
 		state.gameMode.info = true;
+    console.log(state.gameMode.info);
     if (state.gameMode.info === true) {
     pauseGame();
-    console.log("if you are stuck here, you can temporarily blank out the girlMeetsObstacle function from animateCanvas")
+    console.log("i'm going to fill the info page with", i, "text");
     setInterval(fillInfoPage, 300);
     }
   }
@@ -202,6 +203,7 @@ function fillInfoPage() {
   ctx.fillText(state.encounteredObstacle.bullet1, 120, 100);
   ctx.fillText(state.encounteredObstacle.bullet2, 120, 200);
   ctx.fillText(state.encounteredObstacle.bullet3, 120, 300);
+  state.encounteredObstacle.x = 10000;
   }
 }
 
@@ -209,7 +211,6 @@ canvas.addEventListener("click", clearPopUp);
 
 function clearPopUp(e) {
   state.gameMode.info = false;
-  state.light.x = 10000;
   console.log("make the canvas disappear");
   animateCanvas();
 }
