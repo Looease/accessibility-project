@@ -17,10 +17,22 @@
   </main>
 
   <div class="flexcontainer2">
-   <a class="button1" href=""> Pick me! </a>
+   <button onclick="wrongChoice()"> Pick me! </button>
    <a class="button2" href="p2.html">  No, me! </a>
-   <a class="button3" href=""> Over here! Pick Me! </a>
+   <button onclick="wrongChoice()"> Over here! Pick me! </button>
+
 
   </div>
+
+  <p id="demo"></p>
+
+  <script>
+  function wrongChoice() {
+  var txt;
+  if (confirm("Try again!\nHint: Who is this coding school for?")) {
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+ </script>
   </body>
 </html>
