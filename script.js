@@ -20,26 +20,22 @@ var state = {
   },
   trex: {
     x: 400,
-    speed:0,
   },
   light: {
     bright: false,
     // create: lights(),
     x: 850,
-    speed:0,
     bullet1:"Autistic people can experience sensory overload",
     bullet2:"Distractions like flickering lights can be unbearable",
     bullet3:"Ensure your public space doesn't have harsh lighting",
   },
   steg: {
     x: 1100,
-    speed:0,
   },
   crowd: {
     armsUp: false,
     // appear: people(),
     x: 1550,
-    speed:0,
     height:350,
     width:350,
     bullet1:"Large crowds can provoke anxiety and ultimately overpower a person’s ability to control him or herself",
@@ -52,6 +48,9 @@ var state = {
     bullet1:"The world can seem a very unpredictable and confusing place to autistic people, something like a ...",
     bullet2:"pre-event info",
     bullet3:"easy to understand info",
+  },
+  exitSign: {
+    x: 2500,
   },
   spacebar: false,
   infoPageBorder: {
@@ -72,6 +71,12 @@ var state = {
     width:120,
     height: 30,
   },
+  continueButton:{
+  x: canvas.width/2 - 50,
+  y: canvas.height/2,
+  width:120,
+  height: 30,
+},
   keypad:{
   upPressed: false,
   leftPressed: false,
@@ -86,6 +91,12 @@ var state = {
 
 // This is our obstacles array for the loop in the girlMeetsObstacle function
 state.obstacles = [state.light, state.crowd, state.sign];
+var obstacleNumber = 0;
+function obstacleCounter() {
+obstacleNumber = obstacleNumber + 1;
+console.log("obstacle counter function", obstacleNumber);
+}
+
 
 function flipStateGirl() {
   if(state.girl.walking === false) {
@@ -123,6 +134,7 @@ function animateCanvas() {
   drawTRex();
   drawSteg();
   drawSign();
+  drawExitSign();
   flickerLight();
   animateGirl();
   animateCrowd();
@@ -131,6 +143,7 @@ function animateCanvas() {
   moveSteg();
   moveTRex();
   moveSign();
+  moveExitSign();
   girlMeetsObstacle();
   // tap();
   // movePlayer();
@@ -211,7 +224,13 @@ canvas.addEventListener("click", clearPopUp);
 
 function clearPopUp(e) {
   state.gameMode.info = false;
-  console.log("make the canvas disappear");
+  console.log("make the popup disappear");
+  obstacleCounter();
+  if (obstacleNumber === 3) {
+    console.log("obstacle number in if loop", obstacleNumber);
+    state.exitSign.x = 200;
+  }
+  else {;}
   animateCanvas();
 }
 // next: set up event handler to click the "understand" button
@@ -322,29 +341,39 @@ function drawInfoPage() {
     ctx.fillText("Understood", state.button.x + 10, state.button.y + 20);
 }
 
+function drawExitSign() {
+  var exitSign = new Image();
+  exitSign.src = "exit-sign.jpg";
+  exitSign.onload = function() {
+  ctx.drawImage(exitSign,state.exitSign.x, 50,275,200);
+  }
+}
 
 //Move things around
 
 function moveLight(e){
-  state.light.x  = state.light.x - 1;
+  state.light.x  = state.light.x - 2;
 }
 
 function moveCrowd(e){
-  state.crowd.x = state.crowd.x -1;
+  state.crowd.x = state.crowd.x - 2;
 }
 
 function moveSteg(e){
-  state.steg.x  = state.steg.x - 1;
+  state.steg.x  = state.steg.x - 2;
 }
 
 function moveTRex(e){
-  state.trex.x = state.trex.x - 1;
+  state.trex.x = state.trex.x - 2;
 }
 
 function moveSign(e){
-  state.sign.x = state.sign.x - 1;
+  state.sign.x = state.sign.x - 2;
 }
 
+function moveExitSign(e){
+  state.exitSign.x = state.exitSign.x - 2;
+}
 
 // clear the canvas by redrawing the background each frame
 function clearCanvas() {
