@@ -72,10 +72,10 @@ var state = {
     height: 30,
   },
   continueButton:{
-  x: canvas.width/2 - 50,
+  x: canvas.width/2 - 135,
   y: canvas.height/2,
-  width:120,
-  height: 30,
+  width:270,
+  height:30,
 },
   keypad:{
   upPressed: false,
@@ -147,7 +147,10 @@ function animateCanvas() {
   moveExitSign();
   girlMeetsObstacle();
   }
-  else {pauseGame()}
+  else {
+    endGame();
+    drawGameOver();
+  }
 }
 
 function animateGirl() {
@@ -188,6 +191,13 @@ function pauseGame() {
   clearInterval(control);
   state.gameMode.paused = true;
   console.log("pause game function", state.gameMode);
+
+}
+
+function endGame() {
+  clearInterval(control);
+  state.gameMode.paused = false;
+  console.log("end game function", state.gameMode);
 
 }
 // this pauses the game when the girl meets the obstacle and draws the popup box and fills it with text. Not working on the loop properly
@@ -345,7 +355,6 @@ function drawExitSign() {
   }
 }
 function drawContinueButton() {
-  if(state.gameMode.info === false && state.gameMode.paused === true) {
   ctx.fillStyle = "black";
   ctx.fillRect(
     state.continueButton.x - 3,
@@ -362,10 +371,28 @@ function drawContinueButton() {
   );
   ctx.fillStyle = "black";
   ctx.font = "20px Tahoma";
-  ctx.fillText("Press Spacebar to continue", state.continueButton.x + 10, state.continueButton.y + 10);
-}
+  ctx.fillText("Press Spacebar to continue", state.continueButton.x + 10, state.continueButton.y + 20);
 }
 
+function drawGameOver() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(
+    state.continueButton.x - 3,
+    state.continueButton.y -3,
+    470,
+    state.continueButton.height + 6
+  );
+  ctx.fillStyle = "white";
+  ctx.fillRect(
+    state.continueButton.x,
+    state.continueButton.y,
+    464,
+    state.continueButton.height,
+  );
+  ctx.fillStyle = "black";
+  ctx.font = "20px Tahoma";
+  ctx.fillText("Game Ended : Click Next to Go to Guide Summary", state.continueButton.x + 10, state.continueButton.y + 20);
+}
 //Move things around
 
 function moveLight(e){
