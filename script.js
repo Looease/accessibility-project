@@ -130,6 +130,7 @@ setInterval(flipStateLight,50);
 setInterval(flipStateCrowd,100);
 
 function animateCanvas() {
+  if (state.trex.x > -1600) {
   clearCanvas();
   drawTRex();
   drawSteg();
@@ -145,9 +146,9 @@ function animateCanvas() {
   moveSign();
   moveExitSign();
   girlMeetsObstacle();
-  // tap();
-  // movePlayer();
   }
+  else {pauseGame()}
+}
 
 function animateGirl() {
   if (state.girl.walking === true) {
@@ -186,7 +187,7 @@ var control = setInterval(animateCanvas,30);
 function pauseGame() {
   clearInterval(control);
   state.gameMode.paused = true;
-  console.log(state.gameMode);
+  console.log("pause game function", state.gameMode);
 
 }
 // this pauses the game when the girl meets the obstacle and draws the popup box and fills it with text. Not working on the loop properly
@@ -196,51 +197,46 @@ function girlMeetsObstacle() {
     var obstacle = state.obstacles[i];
     if (obstacle.x <= state.girl.x + 280) {
 		state.encounteredObstacle = obstacle;
-    console.log("I've encountered obstacle", i);
 		state.gameMode.info = true;
-    console.log(state.gameMode.info);
+    console.log("girl meets obstacle function", state.gameMode.info);
     if (state.gameMode.info === true) {
     pauseGame();
-    console.log("i'm going to fill the info page with", i, "text");
     setInterval(fillInfoPage, 300);
     }
   }
 }
 }
-// This function fills the popup box with text and changes with each loop.  Can't seem to stop it at the moment!
+// This function fills the popup box with text and changes with each loop.
 function fillInfoPage() {
+  // this keeps tally of the number of obstacles
   if (state.gameMode.info === true) {
+  obstacleCounter();
+  // this makes the exit sign appear in the right after the last obstacle
+  if (obstacleNumber === 3) {
+      state.exitSign.x = 200;
+  }
+  else {;}
   drawInfoPage();
+  // this puts the text in the info box according to the obstacle
   ctx.fillStyle = "black";
   ctx.font = "20px Tahoma";
   ctx.fillText(state.encounteredObstacle.bullet1, 120, 100);
   ctx.fillText(state.encounteredObstacle.bullet2, 120, 200);
   ctx.fillText(state.encounteredObstacle.bullet3, 120, 300);
+  // this is a clumsy way of making the obstacle disappear
   state.encounteredObstacle.x = 10000;
+  state.gameMode.info = false
   }
 }
 
 canvas.addEventListener("click", clearPopUp);
 
+// on a mouseclick, any popup is cleared and the game is drawn.
+// If there is no pop up it it just draws the game once.
 function clearPopUp(e) {
-  state.gameMode.info = false;
-  console.log("make the popup disappear");
-  obstacleCounter();
-  if (obstacleNumber === 3) {
-    console.log("obstacle number in if loop", obstacleNumber);
-    state.exitSign.x = 200;
-  }
-  else {;}
+  console.log("clear popup function after mouseclick", state.gameMode);
   animateCanvas();
 }
-// next: set up event handler to click the "understand" button
-// when Understood button is clicked
-// function clearInfoPage(){
-  // redraw canvas
-  // flip gameMode back to info = false
-  // flip gameMode back to paused = false
-// restart animation and move the loop on...
-
 
 // 2 functions to draw girl walking
 function drawGirlStill() {
@@ -348,6 +344,27 @@ function drawExitSign() {
   ctx.drawImage(exitSign,state.exitSign.x, 50,275,200);
   }
 }
+function drawContinueButton() {
+  if(state.gameMode.info === false && state.gameMode.paused === true) {
+  ctx.fillStyle = "black";
+  ctx.fillRect(
+    state.continueButton.x - 3,
+    state.continueButton.y -3,
+    state.continueButton.width + 6,
+    state.continueButton.height + 6
+  );
+  ctx.fillStyle = "white";
+  ctx.fillRect(
+    state.continueButton.x,
+    state.continueButton.y,
+    state.continueButton.width,
+    state.continueButton.height,
+  );
+  ctx.fillStyle = "black";
+  ctx.font = "20px Tahoma";
+  ctx.fillText("Press Spacebar to continue", state.continueButton.x + 10, state.continueButton.y + 10);
+}
+}
 
 //Move things around
 
@@ -395,6 +412,7 @@ function drawBackground() {
 function pause () {
   if (state.gameMode.paused){
       clearInterval(control);
+      console.log("louise space bar pause function", state.gameMode);
   } else {
     control = setInterval(animateCanvas,30);
   }
@@ -406,7 +424,8 @@ function handleKeyDown(e) {
     // state.keyPressed = true;
     state.gameMode.paused = !state.gameMode.paused;
     pause();
-    console.log(state.gameMode)
+    console.log("space bar pressed toggle function",state.gameMode);
+    console.log("where is the trex?",state.trex.x);
   }
 }
 document.addEventListener("keydown", handleKeyDown);
@@ -488,15 +507,3 @@ document.addEventListener("keydown", handleKeyDown);
 //   }
 // }
 // buttons.addEventListener("keyup", rightKeyUp);
-
-
-// var coin1 = {
-//   size: 20,
-//   x: Math.floor(Math.random()*(3*canvas.width/10))+(canvas.width/10),
-//   y: Math.floor(Math.random()*(3*canvas.height/10))+(canvas.height/10),
-//   question1:"One of your online friends is",
-//   question2: "going to help you with your",
-//   question3: "homework, but has asked for",
-//   question4: "your password.",
-//   question5: "Should you give it to them?",
-//   correctAnswer: state.buttons[1]
