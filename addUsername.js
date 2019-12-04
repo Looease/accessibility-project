@@ -11,14 +11,14 @@ var input = (urlParams.get('username'));
 // }
 
 
-function alertMe() {
-  alert("Hello " + (urlParams.get('username')));
+window.onload = function alertMe() {
+  alert("Hello " + (urlParams.get('username')) + ", " + "let the game begin!");
 
 }
 
-alert("Hello " + (urlParams.get('username')) + ", " + "let the game begin!");
+// alert("Hello " + (urlParams.get('username')) + ", " + "let the game begin!");
 
 // function URLSearchParams(){
 //
 // }
-document.addEventListener("click", alertMe)
+// document.addEventListener("click", alertMe)
