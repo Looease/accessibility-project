@@ -4,6 +4,21 @@ console.log(urlParams.get('username'));
 console.log(urlParams.get('password'));
 
 
+var input = (urlParams.get('username'));
+
+// function(urlParams){
+//
+// }
+
+
+function alertMe() {
+  alert("Hello " + (urlParams.get('username')));
+
+}
+
+alert("Hello " + (urlParams.get('username')) + ", " + "let the game begin!");
+
 // function URLSearchParams(){
 //
 // }
+document.addEventListener("click", alertMe)
