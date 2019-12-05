@@ -431,7 +431,7 @@ function drawGameOver() {
   ctx.fillStyle = "black";
   ctx.font = "20px Tahoma";
   ctx.fillText("Game Ended:", state.continueButton.x + 10, state.continueButton.y + 22);
-  ctx.fillText("click 'Next Page' to go to Guide Summary", state.continueButton.x + 10, state.continueButton.y + 45);
+  ctx.fillText("click 'Resources' to go to Guide Summary", state.continueButton.x + 10, state.continueButton.y + 45);
 }
 //Move things around
 
