@@ -1,5 +1,5 @@
 .game{
-  border: solid #bf9b30 16px;
+  border: ridge #bf9b30 26px;
   width: 75%;
   margin: 0 auto;
   display: block;
@@ -17,7 +17,10 @@ h1{
   background-size: 50px;
   text-align: center;
   padding: 15px;
-  font-size: 36px;
+  font-size: 46px;
+  letter-spacing: 15px;
+  font-weight: bold;
+
 }
 
 h2,p{
@@ -25,7 +28,8 @@ h2,p{
 }
 
 .body1{
-  background-image: url(nhm-interior.jpg);
+  background-image: url(pics/museum2.jpg);
+  background-size: 100% 100%;
 }
 .foot{
   display: flex;
@@ -129,6 +133,67 @@ h2,p{
   height: 300px;
 }
 
-a:hover {
-  color: #FB4B4E;
+#nextPage{
+  padding: 11px 85px 11px 85px;
+  margin: 5px;
+  display: block;
+  background-color:red;
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-size: 19px;
+  border: 2px solid #bf9b30;
+  border-radius: 9px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 4px;
 }
+#landingPage{
+  padding: 11px 85px 11px 85px;
+  margin: 5px;
+  display: block;
+  background-color:green;
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-size: 19px;
+  border: 2px solid #bf9b30;
+  border-radius: 9px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+#oneL{
+  display: flex;
+  justify-content: center;
+}
+#pause{
+  padding: 11px 85px 11px 85px;
+  margin: 5px;
+  display: block;
+  background-color:black;
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-size: 19px;
+  border: 2px solid #bf9b30;
+  border-radius: 9px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+#sFlakes{
+  font-weight: bold;
+  font-size: 54px;
+
+}
+#nextPage:hover{
+  background-color:#222121;
+  color: yellow;
+}
+#landingPage:hover{
+  background-color:#222121;
+  color: yellow;
+  font-weight: bold;
+}
+#pause:hover{
+  background-color:#222121;
+  color: yellow;
