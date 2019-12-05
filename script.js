@@ -81,9 +81,9 @@ var state = {
     bullet3:"  autistic people, so it helps if they can prepare in advance.",
     bullet4:"- You have help people prepare for their visit by providing",
     bullet5:"  clear maps and guides which are available beforehand.",
-    bullet6:"- Train your staff to being autism-friendly and of course",
+    bullet6:"- Train your staff to be autism-friendly and of course",
     bullet7:"  it is vital you always involve autistic people when thinking",
-    bullet8:"  about how to make your space austism-accessible.",
+    bullet8:"  about how to make your space autism-accessible.",
   },
   exitSign: {
     x: 2500,
