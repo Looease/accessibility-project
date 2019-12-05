@@ -75,6 +75,15 @@ h2,p{
   padding-left: 11%;
 }
 
+.summaryflexcontainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 90%;
+  padding-left: 5%;
+  font-size: 24px;
+}
 .asideflexconrainer{
   display: flex;
   flex-direction: column;
@@ -94,11 +103,32 @@ h2,p{
   border-radius: 5px;
 }
 
+.submit2{
+  background-color: white;
+  font-size: 20px;
+  padding: 8px 20px;
+  border: 2px solid #FB4B4E;
+  width: 20%;
+  margin-left: 25px;
+  font-family: 'Abel', sans-serif;
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+
 .submit:hover{
+  background-color: #FB4B4E;
+  border-radius: 5px;
+}
+
+.submit2:hover{
   background-color: #FB4B4E;
   border-radius: 5px;
 }
 
 #map{
   height: 300px;
+}
+
+a:hover {
+  color: #FB4B4E;
 }
