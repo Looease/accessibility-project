@@ -1,9 +1,27 @@
+
 var canvas = document.querySelector(".game");
 // - Game is e.g. class id from html
 canvas.width = 700;
 canvas.height = 450;
 var ctx = canvas.getContext("2d");
 
+var urlParams = new URLSearchParams(window.location.search);
+
+console.log(urlParams.get('username'));
+// console.log(urlParams.get('password'));
+
+
+var input = (urlParams.get('username'));
+
+// function(urlParams){
+//
+// }
+
+
+window.onload = function alertMe() {
+  alert("Hello " + (urlParams.get('username')) + ", " + "and welcome to the Dino Museum! Use the spacebar to start and stop the girl. Let the game begin!");
+
+}
 
 // all figures/objects will go in the state
 
@@ -18,6 +36,9 @@ var state = {
     x: 0,
     y: 30,
   },
+  welcomeSign: {
+    x: 50,
+  },
   trex: {
     x: 400,
   },
@@ -25,9 +46,14 @@ var state = {
     bright: false,
     // create: lights(),
     x: 850,
-    bullet1:"Autistic people can experience sensory overload",
-    bullet2:"Distractions like flickering lights can be unbearable",
-    bullet3:"Ensure your public space doesn't have harsh lighting",
+    bullet1:"Hello " + input + ". Did you know...",
+    bullet2:"- Autistic people can experience sensory overload and ",
+    bullet3:"  distractions like flickering lights can be unbearable",
+    bullet4:"- The same goes for overpowering noises (eg from video",
+    bullet5:"  displays) or strong smells (from your award-winning cafe..).",
+    bullet6:"Making your public space autism accessible includes thinking",
+    bullet7:"about reducing the sensory input for your autistic visitors to",
+    bullet8:"create an environment that is comfortable for them to explore.",
   },
   steg: {
     x: 1100,
@@ -38,16 +64,26 @@ var state = {
     x: 1550,
     height:350,
     width:350,
-    bullet1:"Large crowds can provoke anxiety and ultimately overpower a person’s ability to control him or herself",
-    bullet2:"Introduce quiet areas where individuals are able to relax and take a break",
-    bullet3:"Offer an 'Early Birds' opening time solely dedicated to people who would benefit from visiting a hustle and bustle-free environment",
+    bullet1:"Hello again " + input + "!",
+    bullet2:"- Large noisy crowds can provoke anxiety and cause an autistic",
+    bullet3:"  person a great deal of distress or a 'meltdown'.",
+    bullet4:"- Introduce quiet calm spaces where individuals are able to",
+    bullet5:"  relax and take a break.",
+    bullet6:"- You can also offer different opening times solely for those who",
+    bullet7:"  would benefit from visiting away from the usual hustle and",
+    bullet8:"  bustle of the general public.",
   },
   sign: {
     x: 1900,
     speed:0,
-    bullet1:"The world can seem a very unpredictable and confusing place to autistic people, something like a ...",
-    bullet2:"pre-event info",
-    bullet3:"easy to understand info",
+    bullet1:"Last one, " + input + "!",
+    bullet2:"- The world can be a very unpredictable and confusing place to",
+    bullet3:"  autistic people, so it helps if they can prepare in advance.",
+    bullet4:"- You have help people prepare for their visit by providing",
+    bullet5:"  clear maps and guides which are available beforehand.",
+    bullet6:"- Train your staff to being autism-friendly and of course",
+    bullet7:"  it is vital you always involve autistic people when thinking",
+    bullet8:"  about how to make your space austism-accessible.",
   },
   exitSign: {
     x: 2500,
@@ -74,8 +110,6 @@ var state = {
   continueButton:{
   x: canvas.width/2 - 135,
   y: canvas.height/2,
-  width:270,
-  height:30,
 },
   keypad:{
   upPressed: false,
@@ -132,6 +166,7 @@ setInterval(flipStateCrowd,100);
 function animateCanvas() {
   if (state.trex.x > -1600) {
   clearCanvas();
+  drawWelcomeSign();
   drawTRex();
   drawSteg();
   drawSign();
@@ -141,6 +176,7 @@ function animateCanvas() {
   animateCrowd();
   moveLight();
   moveCrowd();
+  moveWelcomeSign();
   moveSteg();
   moveTRex();
   moveSign();
@@ -208,7 +244,7 @@ function girlMeetsObstacle() {
     if (obstacle.x <= state.girl.x + 280) {
 		state.encounteredObstacle = obstacle;
 		state.gameMode.info = true;
-    console.log("girl meets obstacle function", state.gameMode.info);
+    console.log("girl meets obstacle function", state.gameMode);
     if (state.gameMode.info === true) {
     pauseGame();
     setInterval(fillInfoPage, 300);
@@ -230,9 +266,14 @@ function fillInfoPage() {
   // this puts the text in the info box according to the obstacle
   ctx.fillStyle = "black";
   ctx.font = "20px Tahoma";
-  ctx.fillText(state.encounteredObstacle.bullet1, 120, 100);
-  ctx.fillText(state.encounteredObstacle.bullet2, 120, 200);
-  ctx.fillText(state.encounteredObstacle.bullet3, 120, 300);
+  ctx.fillText(state.encounteredObstacle.bullet1, 180, 100);
+  ctx.fillText(state.encounteredObstacle.bullet2, 70, 150);
+  ctx.fillText(state.encounteredObstacle.bullet3, 70, 170);
+  ctx.fillText(state.encounteredObstacle.bullet4, 70, 220);
+  ctx.fillText(state.encounteredObstacle.bullet5, 70, 240);
+  ctx.fillText(state.encounteredObstacle.bullet6, 70, 290);
+  ctx.fillText(state.encounteredObstacle.bullet7, 70, 310);
+  ctx.fillText(state.encounteredObstacle.bullet8, 70, 330);
   // this is a clumsy way of making the obstacle disappear
   state.encounteredObstacle.x = 10000;
   state.gameMode.info = false
@@ -246,6 +287,8 @@ canvas.addEventListener("click", clearPopUp);
 function clearPopUp(e) {
   console.log("clear popup function after mouseclick", state.gameMode);
   animateCanvas();
+  console.log("draw continue button");
+  drawContinueButton();
 }
 
 // 2 functions to draw girl walking
@@ -325,6 +368,15 @@ function drawSign() {
   }
 }
 
+function drawWelcomeSign() {
+  var welcomeSign = new Image();
+  welcomeSign.src = "welcome-sign.png";
+  welcomeSign.onload = function() {
+  ctx.drawImage(welcomeSign,state.welcomeSign.x, 50,200,100);
+  }
+}
+
+
 // This draws the popup box without the text (same for all three obstacles)
 function drawInfoPage() {
   ctx.fillStyle = "black";
@@ -344,6 +396,7 @@ function drawInfoPage() {
   ctx.fillStyle = 'green';
   ctx.fillRect(state.button.x, state.button.y, state.button.width, state.button.height);
     ctx.fillStyle = "white";
+    ctx.font = "20px Tahoma";
     ctx.fillText("Understood", state.button.x + 10, state.button.y + 20);
 }
 
@@ -355,23 +408,11 @@ function drawExitSign() {
   }
 }
 function drawContinueButton() {
-  ctx.fillStyle = "black";
-  ctx.fillRect(
-    state.continueButton.x - 3,
-    state.continueButton.y -3,
-    state.continueButton.width + 6,
-    state.continueButton.height + 6
-  );
-  ctx.fillStyle = "white";
-  ctx.fillRect(
-    state.continueButton.x,
-    state.continueButton.y,
-    state.continueButton.width,
-    state.continueButton.height,
-  );
-  ctx.fillStyle = "black";
-  ctx.font = "20px Tahoma";
-  ctx.fillText("Press Spacebar to continue", state.continueButton.x + 10, state.continueButton.y + 20);
+  var continueButton = new Image();
+  continueButton.src = "continue-button.png";
+  continueButton.onload = function() {
+  ctx.drawImage(continueButton,state.continueButton.x, state.continueButton.y,273,33);
+  }
 }
 
 function drawGameOver() {
@@ -379,19 +420,18 @@ function drawGameOver() {
   ctx.fillRect(
     state.continueButton.x - 3,
     state.continueButton.y -3,
-    470,
-    state.continueButton.height + 6
+    390, 60
   );
   ctx.fillStyle = "white";
   ctx.fillRect(
     state.continueButton.x,
     state.continueButton.y,
-    464,
-    state.continueButton.height,
+    384,54
   );
   ctx.fillStyle = "black";
   ctx.font = "20px Tahoma";
-  ctx.fillText("Game Ended : Click Next to Go to Guide Summary", state.continueButton.x + 10, state.continueButton.y + 20);
+  ctx.fillText("Game Ended:", state.continueButton.x + 10, state.continueButton.y + 22);
+  ctx.fillText("click 'Next Page' to go to Guide Summary", state.continueButton.x + 10, state.continueButton.y + 45);
 }
 //Move things around
 
@@ -413,6 +453,10 @@ function moveTRex(e){
 
 function moveSign(e){
   state.sign.x = state.sign.x - 2;
+}
+
+function moveWelcomeSign(e){
+  state.welcomeSign.x = state.welcomeSign.x - 2;
 }
 
 function moveExitSign(e){
@@ -439,6 +483,7 @@ function drawBackground() {
 function pause () {
   if (state.gameMode.paused){
       clearInterval(control);
+      drawContinueButton();
       console.log("louise space bar pause function", state.gameMode);
   } else {
     control = setInterval(animateCanvas,30);
@@ -452,7 +497,6 @@ function handleKeyDown(e) {
     state.gameMode.paused = !state.gameMode.paused;
     pause();
     console.log("space bar pressed toggle function",state.gameMode);
-    console.log("where is the trex?",state.trex.x);
   }
 }
 document.addEventListener("keydown", handleKeyDown);
